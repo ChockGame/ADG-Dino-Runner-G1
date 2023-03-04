@@ -37,6 +37,8 @@ class Dinosaur(Sprite):
 
         if self.step >= 10:
             self.step = 0
+            pass
+
     
     def jump(self):
         self.image = JUMPING
@@ -60,7 +62,6 @@ class Dinosaur(Sprite):
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
-dinosaur = Dinosaur()
-dinosaur()
+
         
 
