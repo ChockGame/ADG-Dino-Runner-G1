@@ -26,7 +26,7 @@ class Game:
             self.events()
             self.update()
             self.draw()
-        pygame.quit()
+            pygame.quit()
 
     def events(self):
         for event in pygame.event.get():
@@ -44,7 +44,6 @@ class Game:
         #pygame.display.update()
         self.player.draw(self.screen)
         pygame.display.flip()
-
 
     def draw_background(self):
         image_width = BG.get_width()
