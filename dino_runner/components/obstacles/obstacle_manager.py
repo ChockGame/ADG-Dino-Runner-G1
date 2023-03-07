@@ -1,5 +1,5 @@
 import pygame
-from .cactus import Cactus
+from dino_runner.components.obstacles.cactus import Cactus
 
 
 class ObstacleManager():
