@@ -4,6 +4,7 @@ import random
 
 class bird(obstacles):
     def __init__(self):
+        self.type = "bird"
         self.step = 0
         image = BIRD[0]
         super().__init__(image)

@@ -7,7 +7,7 @@ class Score:
     def __init__(self):
         self.score = 0
 
-    def update(self, game):
+    def update(self, game,extra):
         self.score += 1
         if self.score % 100 == 0:
             game.game_speed += 2

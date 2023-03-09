@@ -13,4 +13,4 @@ class cactus(obstacles):
         if cactus_type > 2:
             self.rect.y = 300                       #**** ( ( - )--- ( - )*( - ) =  +   /   ( + )---- ( + )*( - ) =  - )**** AL PONER MAS ES HACIA LO NEGATIVO  SI PONEMOS MENOS ES HACIA ARRIBA (CUADRO DE CORDENADAS)
         else:
-            self.rect.x = 325
+            self.rect.y = 325
