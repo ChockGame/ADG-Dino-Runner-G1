@@ -10,38 +10,37 @@ DINO_DUCKING = "duck"
 class Dinosaur(Sprite):
     POTITION_X = 80
     POTITION_Y = 310
-    POTITION_Y_DINO_DUCK = 340      #POSICION EN EL CUALES LOS PIXELES CAMBIAN AL AGACHARSE *( ( - ) = +   /  ( + ) = - )*
+    POTITION_Y_DINO_DUCK = 330      #POSICION EN EL CUALES LOS PIXELES CAMBIAN AL AGACHARSE *( ( - ) = +   /  ( + ) = - )*
     JUMP_VELOCITY = 8.5
 
-    def _init_(self):
-        self.update_image(DINO_RUNNING[0])
+    def __init__(self):
+        self.update_image(RUNNING[0])
         self.action = DINO_RUNNING
         self.jump_velocity = self.JUMP_VELOCITY
         self.step = 0
 
-        
-        """if self.dino_duck:
-            self.duck()
-        if self.dino_run:
-            self.run()
-        if self.dino_jump:
-            self.jump()
+#        if self.dino_duck:
+#            self.duck()
+#        if self.dino_run:
+#            self.run()
+#        if self.dino_jump:
+#            self.jump()
 
-        if self.step >= 10:
-            self.step = 0
-        
-         if user_input[pygame.K_UP] and not self.dino_jump:
-            self.dino_duck = False
-            self.dino_run = False 
-            self.dino_jump = True
-        if user_input[pygame.K_DOWN] and not self.dino_jump:
-            self.dino_duck = True
-            self.dino_run = False 
-            self.dino_jump = False
-        elif not (self.dino_jump or user_input[pygame.K_DOWN]):
-            self.dino_duck = False
-            self.dino_run = True
-            self.dino_jump = False"""
+#        if self.step >= 10:
+#            self.step = 0
+
+#        if user_input[pygame.K_UP] and not self.dino_jump:
+#           self.dino_duck = False
+#           self.dino_run = False 
+#           self.dino_jump = True
+#        if user_input[pygame.K_DOWN] and not self.dino_jump:
+#            self.dino_duck = True
+#            self.dino_run = False 
+#            self.dino_jump = False
+#        elif not (self.dino_jump or user_input[pygame.K_DOWN]):
+#            self.dino_duck = False
+#            self.dino_run = True
+#            self.dino_jump = False
         
     def update(self,user_input):
         if self.action == DINO_RUNNING:
@@ -64,7 +63,7 @@ class Dinosaur(Sprite):
             pass
 
     def duck(self):
-        self.image(DUCKING[self.step // 5], pos_y=self.POTITION_Y_DINO_DUCK) 
+        self.update_image(DUCKING[self.step // 5], pos_y=self.POTITION_Y_DINO_DUCK) 
         self.step += 1
 
     def jump(self):
@@ -77,7 +76,7 @@ class Dinosaur(Sprite):
            self.rect.y = self.POTITION_Y
 
     def run(self):
-        self.image = RUNNING[self.step // 5] 
+        self.update_image(RUNNING[self.step // 5]) 
         self.step += 1
 
     def update_image(self, image: pygame.surface, pos_x=None, pos_y=None):
