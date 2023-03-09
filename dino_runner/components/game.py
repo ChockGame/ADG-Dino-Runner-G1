@@ -4,10 +4,11 @@ import pygame
 from dino_runner.components.dinosaur import Dinosaur
 
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
+from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.components.score import Score
 
 
-from dino_runner.utils.constants import BG, CLOUD, DINO_START, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import BG, CLOUD, DINO_START, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, SHIELD_TYPE, TITLE, FPS
 
 
 class Game:
@@ -28,6 +29,8 @@ class Game:
         self.obstacle_manage = ObstacleManager()
         self.score = Score()
         self.death_count = 0
+        self.power_up_manger.reset()
+        self.power_up_manger = PowerUpManager()
 
     def run(self):
         self.executing = True
@@ -41,6 +44,7 @@ class Game:
         # Game loop: events - update - draw
         self.playing = True
         self.obstacle_manage.reset()
+        #self.score.reset()
         while self.playing:
             self.events()
             self.update()
@@ -56,6 +60,7 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manage.update(self.game_speed, self.player, self.on_death)
         self.score.update(self)
+        self.power_up_manger.update(self.game_speed, self.score.score)
 
     def draw(self):
         self.clock.tick(FPS)
@@ -65,6 +70,8 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manage.draw(self.screen)
         self.score.draw(self.screen)
+        self.power_up_manger.draw(self.screen)
+        self.playing.check_power_up(self.screen)
         # pygame.display.update()
         pygame.display.flip()
         
@@ -78,8 +85,11 @@ class Game:
         self.x_pos_bg -= self.game_speed
 
     def on_death(self):
-        self.playing = False
-        self.death_count += 1
+        is_invincible = self.player.type == SHIELD_TYPE
+        if not is_invincible:
+            pygame.time.delay(500)
+            self.playing = False
+            self.death_count += 1
 
     """def Draw_Cloud(self):
        image_width = CLOUD.get_width()
